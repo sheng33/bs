@@ -1,22 +1,27 @@
 <template>
-    <div id="main" v-bind:style="'height:' + (fullHeight-fullHeight*0.22) + 'px'">
+    <div id="main" v-bind:style="'height:' + (fullHeight-fullHeight*0.25) + 'px'">
         <div id="left">
             <img  id="imgBox" v-bind:src="linkerImg.src"/>
         </div>
         <div id="right">
-            <h1 id="title">即时聊天系统</h1>
+            <h1 id="title">标题</h1>
             <div id="from">
                 <span>用户名：</span>
                 <input type="text" id="userName" placeholder="请输入用户名" style="margin-bottom: 15px"/>
-                <span> </span>
-                <span>密码：</span>
+                <span>密码：<a href="#">忘记密码？</a></span>
                 <input type="password" id="userPassword" placeholder="请输入密码"/>
                 <p>
                     <input type="checkbox"/><span>Remember Me</span>
+                    <span id="showPassword">
+                        <input type="checkbox">
+                        显示密码
+                    </span>
                 </p>
             </div>
-
-            <button class="button button-glow button-rounded button-primary">登录</button>
+            <p>
+                <button class="button button-glow button-rounded button-primary">登录</button>
+                <span>没有账户，<a href="#">立即注册</a></span>
+            </p>
 
         </div>
     </div>
@@ -63,10 +68,10 @@
 <link src="../static/css/buttons.css"/>
 <style scoped>
     #main {
-        padding: 1%;
+        padding:  1% 0 0 0;
     }
     #from input{
-        width: 500px;
+        width: 560px;
         height: 50px;
         border: 1px solid #ccc;
         border-radius: 5px;
@@ -75,10 +80,11 @@
         font-size: 24px;
     }
     #from p input{
-        width: 14px;
-        height: 14px;
+        width: 18px;
+        height: 18px;
     }
     #from p{
+        margin-top: 3px;
         height: 40px;
         margin-bottom: 10px;
     }
@@ -88,6 +94,10 @@
         align-items:center;
         font-size: 16px;
     }
+    #from span a{
+        margin-left: 70%;
+        font-size: 12px;
+    }
     #left {
         float:left;
         width: 50%;
@@ -95,17 +105,17 @@
     }
     #right {
         padding: 0;
-        margin-top: 5.5%;
-        margin-left: 50%;
-        width: 50%;
+        margin-top: 10%;
+        margin-left: 55%;
+        width: 45%;
         height: 100%;
         text-align: left;
     }
     #imgBox{
-        margin-left: -25%;
+        margin-left: -200px;
         text-align: -webkit-center;
-        width: 950px;
-        height: 550px;
+        width: 150%;
+        height: 120%;
         background-size: cover;
     }
     #title{
@@ -115,12 +125,27 @@
         letter-spacing: 0.6pt;
         word-spacing: 6.2pt;
     }
+    #showPassword{
+        /*background-color: #1B9AF7;*/
+        border-radius: 2px;
+        width: 150px;
+        height: 40px;
+        margin-top: -100px;
+        margin-left: 62%;
+    }
     span{
         display:block;
-        margin:10px 0;
+        margin:10px 0 0 0;
+    }
+    p span{
+        display: inline;
+        font-size: 12px;
     }
     button{
         width: 120px;
+        height: 45px;
         font-size: 20px;
+        display: inline;
+        margin-right: 20px;
     }
 </style>
