@@ -5,11 +5,11 @@
         </div>
         <div id="right">
             <h1 id="title">标题</h1>
-            <div id="from">
+            <form id="from" @submit="onSubmit2()">
                 <span>用户名：</span>
-                <input type="text" id="userName" placeholder="请输入用户名" style="margin-bottom: 15px"/>
+                <input type="text" id="userName" v-model="userName" value="userName" placeholder="请输入用户名" style="margin-bottom: 15px"/>
                 <span>密码：<a href="#">忘记密码？</a></span>
-                <input type="password" id="userPassword" placeholder="请输入密码"/>
+                <input type="password" v-model="passWord"  id="userPassword" placeholder="请输入密码"/>
                 <p>
                     <input type="checkbox"/><span>Remember Me</span>
                     <span id="showPassword">
@@ -17,11 +17,11 @@
                         显示密码
                     </span>
                 </p>
-            </div>
-            <p>
-                <button class="button button-glow button-rounded button-primary">登录</button>
-                <span>没有账户，<a href="#">立即注册</a></span>
-            </p>
+            </form>
+                <p>
+                    <button type="submit" v-on:click="login()" class="button button-glow button-rounded button-primary">登录</button>
+                    <span>没有账户，<a href="#">立即注册</a></span>
+                </p>
 
         </div>
     </div>
@@ -34,6 +34,8 @@
         data (){
             return {
                 fullHeight: document.documentElement.clientHeight,
+                userName:this.userName || '',
+                passWord:this.passWord || '',
                 linkerImg: {
                     src: require('../static/img/loginImg.png')
                 }
@@ -57,12 +59,37 @@
         methods :{
             getBodyHeight(){
                 const that = this
-                window.onresize(() => {
+                window.onresize  = () => {
                     window.fullHeight = document.documentElement.clientHeight
                     that.fullHeight = window.fullHeight
-                })()
+                }
+            },
+            login(){
+                let data= {
+                    userName:this.$data.userName,
+                    passWord:this.$data.passWord
+                }
+                if(data.userName === ''||data.passWord === ''){
+                    alert("用户名或密码不能为空")
+                }
+                console.log(data)
+                this.$axios({
+                    method:'get',
+                    url:'/api/user.json',
+                    data:data,
+                    dataType: 'json'
+                }).then(res => {
+                    if(res.data.code == 200){
+                        console.log(res.data)
+                        sessionStorage.username = this.username;
+                        this.$router.push({path:'/main'})
+                    }else{
+                        alert('登录失败')
+                    }
+                })
             }
-        }
+        },
+
     }
 </script>
 <link src="../static/css/buttons.css"/>
